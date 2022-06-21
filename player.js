@@ -32,9 +32,26 @@ class Player {
         this.left += 4;
       }
     }
+
+    if (keyIsDown(ARROW_UP)) {
+      if (this.top > 0) {
+        this.top -= 10;
+      }
+    }
   }
 
   hasReachedTheGround() {
     return this.top >= this.floor;
   }
+
+
+  keyPressed() {
+    if (keyCode === ARROW_UP) {
+      value = this.height;
+    } else if (keyCode === ARROW_DOWN) {
+      value = 0;
+    }
+  }
 }
+
+

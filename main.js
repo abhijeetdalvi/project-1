@@ -4,13 +4,14 @@ function setup() {
   createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 }
 
+function preload() {
+  game.preload();
+}
+
 function draw() {
   game.play();
 }
 
-function preload() {
-  game.preload();
-}
 
 // function keyPressed() {
 //   game.keyPressed();

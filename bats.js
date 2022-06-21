@@ -12,12 +12,8 @@ class Bats {
   //   }
 
   drawBats() {
-    // push();
-    // fill("orange");
-    // rect(this.left, this.top, this.width, this.height);
-
-    textSize(30);
-    text("🎃", this.left, this.top);
+    textSize(40);
+    text("🦇", this.left, this.top);
     this.top += this.speed;
     //pop();
   }
