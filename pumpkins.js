@@ -27,8 +27,8 @@ class Pumpkins {
     }
   }
 
-  // resetTopAndLeft() {
-  //   this.x = this.setRandomPositionX();
-  //   this.y = this.setRandomPositionY();
-  // }
+  resetTopAndLeft() {
+    this.top = this.random(550, 650);
+    this.left = this.random(100, 1100);
+  }
 }
