@@ -9,7 +9,7 @@ class Player {
   }
 
   preload() {
-    this.img = loadImage("./Images/istockphoto-right.jpg");
+    this.img = loadImage("Images/istockphoto-right.jpg");
   }
 
   drawPlayer() {
@@ -44,7 +44,6 @@ class Player {
     return this.top >= this.floor;
   }
 
-
   keyPressed() {
     if (keyCode === ARROW_UP) {
       value = this.height;
@@ -53,5 +52,3 @@ class Player {
     }
   }
 }
-
-

@@ -3,7 +3,6 @@ class Game {
     this.background = new Background();
     this.player = new Player();
     this.bats = [];
-    //this.fruit = new Pumpkins();
     this.fruit = [];
   }
 
@@ -32,10 +31,10 @@ class Game {
       this.fruit.push(new Pumpkins());
     }
 
-    this.fruit = this.fruit.filter((appear) => {
-      appear.drawPumpkins();
+    this.fruit = this.fruit.filter((currentPumpkin) => {
+      currentPumpkin.drawPumpkins();
 
-      return appear.top <= 650; //(any number smaller or equal to 300 will always be smaller than any random number between 500 and 650)
+      return !currentPumpkin.shouldDisappear;
     });
   }
 
