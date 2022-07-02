@@ -7,6 +7,7 @@ class Game {
     this.bats = [];
     this.fruit = [];
     this.rocketArray = [];
+    this.score = 0;
   }
 
   preload() {
@@ -21,9 +22,6 @@ class Game {
   play() {
     this.background.drawBackground();
     this.player.drawPlayer();
-
-    //this.music.drawMusic();
-    // this.rocketCollisionWithBat();
 
     if (frameCount % 75 === 0) {
       this.bats.push(new Bats(batty));
@@ -50,59 +48,68 @@ class Game {
       newRocket.drawRockets();
     });
 
-    if (this.pumpkinCollisionWithPlayer()) {
-      this.fruit.splice(this.fruit.indexOf(currentPumpkin), 1);
-      //this.fruit.resetTopAndLeft();
-      console.log("collision");
-      this.score++;
-    }
+    // if (this.pumpkinCollisionWithPlayer()) {
+    //   this.fruit.splice(this.fruit.indexOf(currentPumpkin), 1);
+    //   //this.fruit.resetTopAndLeft();
+    //   console.log("collision");
+    //   this.score++;
+    // }
+
+    this.bats.forEach((bat) => {
+      this.rocketArray.forEach((newRocket) => {
+        if (this.rocketCollisionWithBat(bat, newRocket)) {
+          this.bats.splice(this.bats.indexOf(bat), 1);
+          this.rocketArray.splice(this.rocketArray.indexOf(newRocket), 1);
+          console.log("bump");
+          this.score++;
+        }
+      });
+    });
 
     //this.flush();
   }
 
-  pumpkinCollisionWithPlayer() {
-    const bottomOfPlayer = this.player.top + this.player.height;
-    const topOfPumpkin = this.fruit.top;
-    const isPlayerBottomBiggerThenTopOfPumpkin = bottomOfPlayer > topOfPumpkin;
+  // pumpkinCollisionWithPlayer() {
+  //   const bottomOfPlayer = this.player.top + this.player.height;
+  //   const topOfPumpkin = this.fruit.top;
+  //   const isPlayerBottomBiggerThenTopOfPumpkin = bottomOfPlayer > topOfPumpkin;
 
-    const topOfPlayer = this.player.top;
-    const bottomOfPumpkin = this.fruit.height + this.fruit.top;
-    const isTopOfPlayerSmallerThanBottomOfPumpkin =
-      topOfPlayer <= bottomOfPumpkin;
+  //   const topOfPlayer = this.player.top;
+  //   const bottomOfPumpkin = this.fruit.height + this.fruit.top;
+  //   const isTopOfPlayerSmallerThanBottomOfPumpkin =
+  //     topOfPlayer <= bottomOfPumpkin;
 
-    const leftOfPlayer = this.player.left;
-    const rightOfPumpkin = this.fruit.left + this.fruit.width;
-    const isLeftOfPlayerSmallerThanRightOfPumpkin =
-      leftOfPlayer <= rightOfPumpkin;
+  //   const leftOfPlayer = this.player.left;
+  //   const rightOfPumpkin = this.fruit.left + this.fruit.width;
+  //   const isLeftOfPlayerSmallerThanRightOfPumpkin =
+  //     leftOfPlayer <= rightOfPumpkin;
 
-    const rightOfPlayer = this.player.width + this.player.left;
-    const leftOfPumpkin = this.fruit.left;
-    const isRightOfPlayerBiggerThanLeftOfPumpkin =
-      rightOfPlayer >= leftOfPumpkin;
+  //   const rightOfPlayer = this.player.width + this.player.left;
+  //   const leftOfPumpkin = this.fruit.left;
+  //   const isRightOfPlayerBiggerThanLeftOfPumpkin =
+  //     rightOfPlayer >= leftOfPumpkin;
 
-    return (
-      isPlayerBottomBiggerThenTopOfPumpkin &&
-      isTopOfPlayerSmallerThanBottomOfPumpkin &&
-      isLeftOfPlayerSmallerThanRightOfPumpkin &&
-      isRightOfPlayerBiggerThanLeftOfPumpkin
-    );
-  }
+  //   return (
+  //     isPlayerBottomBiggerThenTopOfPumpkin &&
+  //     isTopOfPlayerSmallerThanBottomOfPumpkin &&
+  //     isLeftOfPlayerSmallerThanRightOfPumpkin &&
+  //     isRightOfPlayerBiggerThanLeftOfPumpkin
+  //   );
+  // }
 
   // PlayerCollisionWithPumpkin() {
   //   for (let bat of this.bats) {
-  //     //console.log(bat);
-  //     for (let flower of this.player.flowerArray) {
-  //       //console.log(flower);
+  //     for (let newRocket of this.rocketArray) {
   //       if (
-  //         dist(bat.this.left, bat.this.top, flower.this.left, flower.this.top) <
+  //         dist(bat.this.left, bat.this.top, newRocket.this.left, newRocket.this.top) <
   //         10
   //       ) {
   //         this.bats.splice(this.bats.indexOf(bat), 1);
-  //         this.player.flowerArray.splice(
-  //           this.player.flowerArray.indexOf(flower),
+  //         this.rocketArray.splice(
+  //           this.rocketArray.indexOf(newRocket),
   //           1
   //         );
-  //         //   console.log("collision");
+  //         console.log("collision");
   //       }
   //     }
   //   }
@@ -131,7 +138,7 @@ class Game {
   //shooting location
   shootingOrigin() {
     return {
-      top: this.player.top - 70,
+      top: this.player.top - 30,
       left: this.player.left + 10,
     };
   }
@@ -141,5 +148,13 @@ class Game {
     this.rocketArray = this.rocketArray.filter(
       (newRocket) => newRocket.top <= CANVAS_HEIGHT
     );
+  }
+
+  rocketCollisionWithBat(bat, newRocket) {
+    const bottomOfBat = bat.height + bat.top;
+    const topOfRocket = newRocket.rocketTop;
+    const result = bottomOfBat >= topOfRocket;
+
+    return result;
   }
 }

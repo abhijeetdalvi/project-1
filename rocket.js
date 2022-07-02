@@ -3,8 +3,8 @@ class Rocket {
     this.rocketTop = rocketTop;
     this.rocketLeft = rocketLeft;
     this.rocketImg = rocketImg;
-    this.width = 50;
-    this.height = 50;
+    this.rocketWidth = 50;
+    this.rocketHeight = 50;
   }
 
   // preload() {
@@ -18,8 +18,8 @@ class Rocket {
       this.rocketImg,
       this.rocketLeft,
       this.rocketTop,
-      this.width,
-      this.height
+      this.rocketWidth,
+      this.rocketHeight,
     );
     this.rocketTop -= 5;
   }
