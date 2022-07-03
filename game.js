@@ -69,52 +69,6 @@ class Game {
     //this.flush();
   }
 
-  // pumpkinCollisionWithPlayer() {
-  //   const bottomOfPlayer = this.player.top + this.player.height;
-  //   const topOfPumpkin = this.fruit.top;
-  //   const isPlayerBottomBiggerThenTopOfPumpkin = bottomOfPlayer > topOfPumpkin;
-
-  //   const topOfPlayer = this.player.top;
-  //   const bottomOfPumpkin = this.fruit.height + this.fruit.top;
-  //   const isTopOfPlayerSmallerThanBottomOfPumpkin =
-  //     topOfPlayer <= bottomOfPumpkin;
-
-  //   const leftOfPlayer = this.player.left;
-  //   const rightOfPumpkin = this.fruit.left + this.fruit.width;
-  //   const isLeftOfPlayerSmallerThanRightOfPumpkin =
-  //     leftOfPlayer <= rightOfPumpkin;
-
-  //   const rightOfPlayer = this.player.width + this.player.left;
-  //   const leftOfPumpkin = this.fruit.left;
-  //   const isRightOfPlayerBiggerThanLeftOfPumpkin =
-  //     rightOfPlayer >= leftOfPumpkin;
-
-  //   return (
-  //     isPlayerBottomBiggerThenTopOfPumpkin &&
-  //     isTopOfPlayerSmallerThanBottomOfPumpkin &&
-  //     isLeftOfPlayerSmallerThanRightOfPumpkin &&
-  //     isRightOfPlayerBiggerThanLeftOfPumpkin
-  //   );
-  // }
-
-  // PlayerCollisionWithPumpkin() {
-  //   for (let bat of this.bats) {
-  //     for (let newRocket of this.rocketArray) {
-  //       if (
-  //         dist(bat.this.left, bat.this.top, newRocket.this.left, newRocket.this.top) <
-  //         10
-  //       ) {
-  //         this.bats.splice(this.bats.indexOf(bat), 1);
-  //         this.rocketArray.splice(
-  //           this.rocketArray.indexOf(newRocket),
-  //           1
-  //         );
-  //         console.log("collision");
-  //       }
-  //     }
-  //   }
-  // }
-
   keyPressed() {
     this.player.keyPressed();
   }
