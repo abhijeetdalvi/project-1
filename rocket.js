@@ -1,10 +1,11 @@
 class Rocket {
   constructor(rocketTop, rocketLeft, rocketImg) {
-    this.rocketTop = rocketTop;
-    this.rocketLeft = rocketLeft;
+    this.top = rocketTop;
+    this.left = rocketLeft;
     this.rocketImg = rocketImg;
-    this.rocketWidth = 50;
-    this.rocketHeight = 50;
+    this.width = 50 / 1.2;
+    this.height = 50 / 1.2;
+    this.hasShotABAt = false;
   }
 
   // preload() {
@@ -14,13 +15,7 @@ class Rocket {
   drawRockets() {
     // textSize(20);
     // text("🌼", this.left, this.top);
-    image(
-      this.rocketImg,
-      this.rocketLeft,
-      this.rocketTop,
-      this.rocketWidth,
-      this.rocketHeight,
-    );
-    this.rocketTop -= 5;
+    image(this.rocketImg, this.left, this.top, this.width, this.height);
+    this.top -= 5;
   }
 }

@@ -4,7 +4,7 @@ class Player {
     this.width = PLAYER_WIDTH;
     this.left = 0;
     this.top = 0;
-    this.floor = 580;
+    this.floor = CANVAS_HEIGHT - this.height;
     this.velocity = 0;
     //this.rocketArray = [];
     this.img = img;

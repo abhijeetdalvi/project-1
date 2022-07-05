@@ -1,35 +1,25 @@
 class Pumpkins {
   constructor(img) {
-    this.left = random(100, 1100);
-    this.top = random(550, 600);
+    const diff = 100;
+    this.left = random(diff / 1.2, CANVAS_WIDTH - diff / 1.2);
+    const heightDiff = 50;
+    this.top = random(
+      CANVAS_HEIGHT - heightDiff * 2,
+      CANVAS_HEIGHT - heightDiff
+    );
     this.pumpkinsBirthCertificate = frameCount;
     this.lifeTime = random(60 * 2, 60 * 5);
     this.img = img;
-    this.width = 40;
-    this.height = 40;
+    this.width = 40 / 1.2;
+    this.height = 40 / 1.2;
+    this.hasBeenEatenByPlayer = false;
   }
 
-  // setRandomPositionX() {
-  //   return Math.floor(Math.random) * CANVAS_WIDTH;
-  // }
-
-  // setRandomPositionY() {
-  //   return Math.floor(Math.random) * CANVAS_HEIGHT;
-  // }
-
-  drawPumpkins() {
-    // textSize(25);
-    // text("🎃", this.left, this.top);
-    //this.top = this.speed;
+  draw() {
     image(this.img, this.left, this.top, this.width, this.height);
 
     if (this.pumpkinsBirthCertificate + this.lifeTime <= frameCount) {
       this.shouldDisappear = true;
     }
   }
-
-  // resetTopAndLeft() {
-  //   this.top = this.random(550, 650);
-  //   this.left = this.random(100, 1100);
-  // }
 }
