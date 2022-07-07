@@ -14,3 +14,5 @@ let rocket;
 const PLAYER_WIDTH = 70 / 1.2;
 const PLAYER_HEIGHT = 70 / 1.2;
 let backgroundForest;
+const batKills = document.querySelector("h2 span");
+const pumpkinEat = document.querySelector("h3 span");

@@ -2,18 +2,17 @@ class Game {
   constructor() {
     this.background = new Background();
     this.player = new Player();
-    //this.rocket = new Rocket();
-    //this.music = new Music();
     this.bats = [];
     this.fruit = [];
     this.rocketArray = [];
     this.kills = 0;
     this.hit = true;
     this.score = 0;
+    this.mode = 0;
   }
 
   preload() {
-    //backgroundForest = loadSound("Assets/powerful-victory-trailer-103656.mp3");
+    backgroundForest = loadSound("Assets/mixkit-game-level-music-689.wav");
     this.background.preload();
     batty = loadImage("Assets/batty.png");
     pumpkino = loadImage("Assets/pumpkin.png");
@@ -29,19 +28,40 @@ class Game {
   play() {
     this.background.drawBackground();
     this.player.drawPlayer();
+
+    //start screen
+    // fill(0);
+    // rect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    // fill("red");
+    // textSize(50);
+    // textAlign(CENTER);
+    // text("The Dark Knight", 500, 200);
+    // textSize(20);
+    // textAlign(CENTER);
+    // text("Press 'P' to play", 500, 250);
+    // text(
+    //   "Goal: Eat pumpkins before they disappear. Shoot rockets to kill bats. Don't get hit by bats.",
+    //   500,
+    //   290
+    // );
+    // text("Use arrow keys to move. Use spacebar to shoot.", 500, 330);
+    // text("Refresh page to play again.", 500, 370);
+    // noLoop();
+
     //backgroundForest.play();
 
-    // collision player with bat
+    // collision player with bat. If bat hits player then game is over.
     this.bats = this.bats.filter((bat) => {
       bat.drawBats();
 
       if (this.collisionTwoElements(this.player, bat)) {
         fill(0);
-        rect(0, 0, 1200, 650);
-        fill(227, 101, 91);
-        textSize(50);
+        rect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        fill("red");
+        textSize(100);
         textAlign(CENTER);
-        text("GAME OVER", 400, 400);
+        text("GAME OVER", 500, 300);
+        noLoop();
         // this logic for what happens after there is a collision with the player is broken
       }
 
@@ -52,16 +72,13 @@ class Game {
           this.kills++;
           console.log("BUMP");
           this.rocketAndBatExplision(rocket, bat);
+          batKills.innerText = ` ${this.kills}`;
         }
         return rocket.top >= 0 && !rocket.hasShotABAt;
       });
 
       return bat.top <= CANVAS_HEIGHT && !bat.hasBeenShotByRocket;
     });
-
-    if (this.playerCollideWithFruit()) {
-      this.score++;
-    }
 
     if (frameCount % 75 === 0) {
       this.bats.push(new Bats(batty));
@@ -83,46 +100,12 @@ class Game {
       if (this.collisionTwoElements(currentPumpkin, this.player)) {
         this.score++;
         currentPumpkin.hasBeenEatenByPlayer = true;
+        pumpkinEat.innerText = ` ${this.score}`;
       }
       return (
         !currentPumpkin.shouldDisappear && !currentPumpkin.hasBeenEatenByPlayer
       );
     });
-
-    //drawing new rocket
-    // this.rocketArray.forEach((newRocket) => {
-    //   newRocket.drawRockets();
-    // });
-
-    //this.flush();
-
-    // if (this.pumpkinCollisionWithPlayer()) {
-    //   this.fruit.splice(this.fruit.indexOf(currentPumpkin), 1);
-    //   //this.fruit.resetTopAndLeft();
-    //   console.log("collision");
-    //   this.score++;
-    // }
-
-    // this.bats.forEach((bat) => {
-    //   this.rocketArray.forEach((newRocket) => {
-    //     if (this.rocketCollisionWithBat(bat, newRocket)) {
-    //       this.bats.splice(this.bats.indexOf(bat));
-    //       this.rocketArray.splice(this.rocketArray.indexOf(newRocket));
-    //       console.log("bump");
-    //       this.score += 1;
-    //       //.innerText = `${this.kills} killed`;
-
-    //       // if(bottomOfBat >= this.player.top) {
-
-    //       // }
-    //     }
-    //   });
-    // });
-
-    // if(this.batHitsPlayer()) {
-    //   console.log("hit");
-
-    // }
   }
 
   keyPressed() {
@@ -203,31 +186,5 @@ class Game {
       leftOfElementOneSmallerThenRightOfElementTwo &&
       rightOfElementOneGreaterThenLeftOfElementTwo
     );
-  }
-
-  playerCollideWithFruit() {
-    const bottomOfPlayer = this.player.top + this.player.height;
-    const topOfFruit = this.fruit.top;
-    const bottomOfPlayerGreaterThenFruit = bottomOfPlayer > topOfFruit;
-
-    const topOfPlayer = this.player.top;
-    const bottomOfFruit = this.fruit.top + this.fruit.height;
-    const topOfPlayerSmallerThenFruit = topOfPlayer < bottomOfFruit;
-
-    const leftOfPlayer = this.player.left;
-    const rightOfFruit = this.fruit.left + this.fruit.width;
-    const leftOfPlayerSmallerThenRightOfFruit = leftOfPlayer < rightOfFruit;
-
-    const rightOfPlayer = this.player.left + this.player.width;
-    const leftOfFruit = this.fruit.left;
-    const rightOfPlayerGreaterThenLeftOfFruit = rightOfPlayer > leftOfFruit;
-
-    return (
-      bottomOfPlayerGreaterThenFruit &&
-      topOfPlayerSmallerThenFruit &&
-      leftOfPlayerSmallerThenRightOfFruit &&
-      rightOfPlayerGreaterThenLeftOfFruit
-    );
-    console.log("isColliding");
   }
 }

@@ -6,17 +6,18 @@ function setup() {
 
 function preload() {
   game.preload();
-  //backgroundForest = loadSound("Assets/powerful-victory-trailer-103656.mp3");
+  //backgroundForest = loadSound("Assets/mixkit-game-level-music-689.wav");
 }
 
 function backgroundMusic() {
-  //backgroundForest.play();
+  backgroundForest.play();
   backgroundForest.loop();
-  backgroundForest.setVolume(0.1);
+  backgroundForest.setVolume(0.3);
 }
 
 function draw() {
   game.play();
+
   //backgroundMusic();
 }
 
