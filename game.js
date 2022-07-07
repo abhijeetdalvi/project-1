@@ -8,11 +8,20 @@ class Game {
     this.kills = 0;
     this.hit = true;
     this.score = 0;
-    this.mode = 0;
+    this.start = false;
   }
 
   preload() {
-    backgroundForest = loadSound("Assets/mixkit-game-level-music-689.wav");
+    backgroundForest = loadSound("Assets/powerful-victory-trailer-103656.mp3");
+    backgroundPumpkin = loadSound(
+      "Assets/mixkit-video-game-treasure-2066 (1).wav"
+    );
+    backgroundRockets = loadSound(
+      "Assets/mixkit-sci-fi-laser-in-space-sound-2825.wav"
+    );
+    backgroundGameOver = loadSound(
+      "Assets/mixkit-completion-of-a-level-2063.wav"
+    );
     this.background.preload();
     batty = loadImage("Assets/batty.png");
     pumpkino = loadImage("Assets/pumpkin.png");
@@ -28,27 +37,34 @@ class Game {
   play() {
     this.background.drawBackground();
     this.player.drawPlayer();
+    //this.backgroundMusic();
 
-    //start screen
-    // fill(0);
-    // rect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    // fill("red");
-    // textSize(50);
-    // textAlign(CENTER);
-    // text("The Dark Knight", 500, 200);
-    // textSize(20);
-    // textAlign(CENTER);
-    // text("Press 'P' to play", 500, 250);
-    // text(
-    //   "Goal: Eat pumpkins before they disappear. Shoot rockets to kill bats. Don't get hit by bats.",
-    //   500,
-    //   290
-    // );
-    // text("Use arrow keys to move. Use spacebar to shoot.", 500, 330);
-    // text("Refresh page to play again.", 500, 370);
-    // noLoop();
+    // start screen
 
-    //backgroundForest.play();
+    /**
+     * If the game hasn't started yet, run this block of code.
+     *
+     * Else, run the logic responsible for the game.
+     */
+    // if (this.start === false) {
+    //   fill(0);
+    //   rect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    //   fill("red");
+    //   textSize(50);
+    //   textAlign(CENTER);
+    //   text("The Dark Knight", 500, 200);
+    //   textSize(20);
+    //   textAlign(CENTER);
+    //   text("Press 'P' to play", 500, 250);
+    //   text(
+    //     "Goal: Eat pumpkins before they disappear. Shoot rockets to kill bats. Don't get hit by bats.",
+    //     500,
+    //     290
+    //   );
+    //   text("Use arrow keys to move. Use spacebar to shoot.", 500, 330);
+    //   text("Refresh page to play again.", 500, 370);
+    //   noLoop();
+    // }
 
     // collision player with bat. If bat hits player then game is over.
     this.bats = this.bats.filter((bat) => {
@@ -61,8 +77,8 @@ class Game {
         textSize(100);
         textAlign(CENTER);
         text("GAME OVER", 500, 300);
+        backgroundGameOver.play();
         noLoop();
-        // this logic for what happens after there is a collision with the player is broken
       }
 
       this.rocketArray = this.rocketArray.filter((rocket) => {
@@ -84,12 +100,6 @@ class Game {
       this.bats.push(new Bats(batty));
     }
 
-    // this.bats = this.bats.filter((bat) => {
-    //   bat.drawBats();
-
-    //   return bat.top <= 650;
-    // });
-
     if (frameCount % 75 === 0) {
       this.fruit.push(new Pumpkins(pumpkino));
     }
@@ -101,6 +111,7 @@ class Game {
         this.score++;
         currentPumpkin.hasBeenEatenByPlayer = true;
         pumpkinEat.innerText = ` ${this.score}`;
+        backgroundPumpkin.play();
       }
       return (
         !currentPumpkin.shouldDisappear && !currentPumpkin.hasBeenEatenByPlayer
@@ -115,8 +126,14 @@ class Game {
   //shooting with spacebar
   keyPressed() {
     if (keyCode === SPACE_BAR) {
-      //console.log('shooting')
+      console.log("shooting");
       this.shootRockets();
+      backgroundRockets.play();
+    }
+    if (keyCode === P_KEY) {
+      this.start = !false;
+
+      console.log("Play");
     }
   }
 
