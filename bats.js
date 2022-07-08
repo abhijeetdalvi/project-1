@@ -9,15 +9,8 @@ class Bats {
     this.hasBeenShotByRocket = false;
   }
 
-  // preload() {
-  //   this.img = loadImage("Images/bats.jpg");
-  // }
-
   drawBats() {
-    // textSize(40);
-    // text("🦇", this.left, this.top);
     image(this.img, this.left, this.top, this.width, this.height);
     this.top += this.speed;
-    //pop();
   }
 }

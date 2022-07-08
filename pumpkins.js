@@ -15,6 +15,9 @@ class Pumpkins {
     this.hasBeenEatenByPlayer = false;
   }
 
+  // Pumpkin image is preloaded in game.js
+  // Pumpkin lifetime is between 2 to 5 seconds and later it disppears.
+
   draw() {
     image(this.img, this.left, this.top, this.width, this.height);
 

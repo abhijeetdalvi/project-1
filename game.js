@@ -9,7 +9,10 @@ class Game {
     this.hit = true;
     this.score = 0;
     this.start = false;
+    this.mode = 0;
   }
+
+  // All game related preloads are below
 
   preload() {
     backgroundForest = loadSound("Assets/06-07-2022-11-49-06.mp3");
@@ -67,6 +70,7 @@ class Game {
     // }
 
     // collision player with bat. If bat hits player then game is over.
+
     this.bats = this.bats.filter((bat) => {
       bat.drawBats();
 
@@ -79,6 +83,8 @@ class Game {
         text("GAME OVER", 500, 300);
         backgroundGameOver.play();
         backgroundForest.stop();
+        !currentPumpkin.draw()
+        
         noLoop();
       }
 
@@ -88,6 +94,7 @@ class Game {
         if (this.collisionTwoElements(rocket, bat)) {
           this.kills++;
           console.log("BUMP");
+
           this.rocketAndBatExplision(rocket, bat);
           batKills.innerText = ` ${this.kills}`;
         }
@@ -133,7 +140,6 @@ class Game {
     }
     if (keyCode === P_KEY) {
       this.start = !false;
-
       console.log("Play");
     }
   }
@@ -143,7 +149,6 @@ class Game {
     this.rocketArray.push(
       new Rocket(rocketLocation.top, rocketLocation.left, rocket)
     );
-    //console.log(this.rocketArray);
   }
 
   //shooting location
@@ -161,21 +166,7 @@ class Game {
     );
   }
 
-  rocketCollisionWithBat(bat, newRocket) {
-    const bottomOfBat = bat.height + bat.top;
-    const topOfRocket = newRocket.rocketTop;
-    const result = bottomOfBat >= topOfRocket;
-
-    return result;
-  }
-
-  batHitsPlayer() {
-    const bottomOfBat = this.bats.top + this.bats.height;
-    const topOfPlayer = this.player.top;
-    const result = bottomOfBat > topOfPlayer;
-
-    return result;
-  }
+  // Collision detection between two elements
 
   collisionTwoElements(elementOne, elementTwo) {
     const bottomOfElementOne = elementOne.top + elementOne.height;

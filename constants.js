@@ -1,5 +1,4 @@
 const CANVAS_WIDTH = 1200 / 1.2;
-
 const CANVAS_HEIGHT = 650 / 1.2;
 const ARROW_RIGHT = 39;
 const ARROW_DOWN = 40;

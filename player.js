@@ -39,12 +39,6 @@ class Player {
         this.top -= 10;
       }
     }
-
-    // this.rocketArray.forEach((rocketino) => {
-    //   rocketino.drawRockets();
-    // });
-
-    // this.flush();
   }
 
   hasReachedTheGround() {

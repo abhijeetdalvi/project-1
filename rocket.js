@@ -1,4 +1,6 @@
 class Rocket {
+  // In constructor we put top, left and image as we want to have fix properties.
+
   constructor(rocketTop, rocketLeft, rocketImg) {
     this.top = rocketTop;
     this.left = rocketLeft;
@@ -8,13 +10,9 @@ class Rocket {
     this.hasShotABAt = false;
   }
 
-  // preload() {
-  //   this.rocketImg = loadImage("Assets/rocket.png");
-  // }
+  // draw rocket image with constructor properties. Image is preloaded in game.js
 
   drawRockets() {
-    // textSize(20);
-    // text("🌼", this.left, this.top);
     image(this.rocketImg, this.left, this.top, this.width, this.height);
     this.top -= 5;
   }
