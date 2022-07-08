@@ -2,10 +2,10 @@ const game = new Game();
 
 function setup() {
   createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
-  //backgroundForest.play();
-  //backgroundForest.loop();
+  backgroundForest.play();
+  backgroundForest.loop();
   backgroundForest.setVolume(0.3);
-  //userStartAudio();
+  userStartAudio();
 }
 
 function preload() {

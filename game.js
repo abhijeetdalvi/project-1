@@ -12,7 +12,7 @@ class Game {
   }
 
   preload() {
-    backgroundForest = loadSound("Assets/powerful-victory-trailer-103656.mp3");
+    backgroundForest = loadSound("Assets/06-07-2022-11-49-06.mp3");
     backgroundPumpkin = loadSound(
       "Assets/mixkit-video-game-treasure-2066 (1).wav"
     );
@@ -78,6 +78,7 @@ class Game {
         textAlign(CENTER);
         text("GAME OVER", 500, 300);
         backgroundGameOver.play();
+        backgroundForest.stop();
         noLoop();
       }
 
