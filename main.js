@@ -17,19 +17,8 @@ function preload() {
   game.preload();
 }
 
-let stage = 0;
-
 function draw() {
-  // if (stage === 0) {
-  //   start.splashScreen();
-  // }
-  // if (mouseIsPressed === true) {
-  //   stage = 1;
-  // }
-  // if (stage === 1) {
   game.play();
-
-  // console.log("mouse");
 }
 
 function keyPressed() {
